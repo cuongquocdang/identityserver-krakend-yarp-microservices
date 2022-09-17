@@ -1,0 +1,13 @@
+version: '3.7'
+services: 
+  krakend:
+    container_name: krakend_apigateway
+    image: devopsfaith/krakend:config-watcher
+    working_dir: /etc/krakend/
+    command: run -c krakend.json
+    environment: 
+      KRAKEND_CONFIG: krakend.json
+    ports: 
+      - 8000:8000
+    volumes: 
+      - ./configs:/etc/krakend/

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://www.krakend.io/schema/v3.json",
+  "version": 3,
+  "name": "KrakenD - API Gateway",
+  "timeout": "3000ms",
+  "cache_ttl": "300s",
+  "output_encoding": "json",
+  "port": 8000,
+  "endpoints": [
+    {
+      "endpoint": "/v1/samples",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/posts",
+          "host": ["https://jsonplaceholder.typicode.com"],
+          "method": "GET",
+          "encoding": "no-op"
+        }
+      ]
+    }
+  ]
+}
