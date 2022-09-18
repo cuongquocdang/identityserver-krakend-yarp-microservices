@@ -1,0 +1,4 @@
+com.example.jwtsecurityautoconfigure.JWTAuthenticationManager
+com.example.jwtsecurityautoconfigure.JWTAuthenticationConverter
+com.example.jwtsecurityautoconfigure.JWTSecurityProperties
+com.example.jwtsecurityautoconfigure.JWTSecurityConfig
