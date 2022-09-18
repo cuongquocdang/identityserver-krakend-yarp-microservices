@@ -41,7 +41,9 @@ public class JWTSecurityConfig {
 
     private AuthenticationFilter authenticationWebFilter() {
         var authenticationFilter = new AuthenticationFilter(jwtAuthenticationManager, jwtAuthenticationConverter);
-        authenticationFilter.setSuccessHandler(new JWTAuthenticationSuccessHandler());
+        // completed JWT Authentication
+        authenticationFilter.setSuccessHandler((request, response, authentication) -> {
+        });
         return authenticationFilter;
     }
 

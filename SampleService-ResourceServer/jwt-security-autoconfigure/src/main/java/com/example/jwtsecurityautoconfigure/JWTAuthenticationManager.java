@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+import static com.example.jwtsecurityautoconfigure.JWTSecurityConstant.*;
+
 @Component("jwtAuthenticationManager")
 @RequiredArgsConstructor
 public class JWTAuthenticationManager implements AuthenticationManager {
@@ -26,7 +28,7 @@ public class JWTAuthenticationManager implements AuthenticationManager {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         var principal = (String) authentication.getPrincipal();
-        var jwtToken = principal.replace("Bearer ", "");
+        var jwtToken = principal.replace(BEARER_PREFIX, EMPTY_STRING);
         var decodedJWT = JWT.decode(jwtToken);
         return extractTokenAndPopulateAuthority(authentication, decodedJWT);
     }
@@ -34,7 +36,7 @@ public class JWTAuthenticationManager implements AuthenticationManager {
     public UsernamePasswordAuthenticationToken extractTokenAndPopulateAuthority(Authentication authentication,
                                                                                 DecodedJWT decodedJWT) {
         var userInfo = populateJWTUserInfo(decodedJWT);
-        List<GrantedAuthority> authorities = new ArrayList<>();
+        var authorities = new ArrayList<GrantedAuthority>();
         authorities.addAll(authentication.getAuthorities());
         authorities.addAll(populateAuthorities(decodedJWT));
         var authenticatedToken = new UsernamePasswordAuthenticationToken(
@@ -53,8 +55,8 @@ public class JWTAuthenticationManager implements AuthenticationManager {
     }
 
     public List<SimpleGrantedAuthority> populateAuthorities(DecodedJWT decodedJWT) {
-        var roleClaim = decodedJWT.getClaim("role");
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        var roleClaim = decodedJWT.getClaim(PAYLOAD_ROLE_ATTRIBUTE);
+        var authorities = new ArrayList<SimpleGrantedAuthority>();
         if (roleClaim.as(Object.class) instanceof List) {
             authorities.addAll(roleClaim.asList(SimpleGrantedAuthority.class));
         } else {
