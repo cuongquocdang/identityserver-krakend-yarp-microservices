@@ -1,0 +1,22 @@
+server:
+  port: 8010
+
+spring:
+  main:
+    banner-mode: off
+  flyway:
+    validate-on-migrate: false
+    table: scs_version
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/core_db?currentSchema=scs
+    username: postgres
+    password: password
+
+# docker run --name core_db -p 5432:5432 -e POSTGRES_PASSWORD=password -e POSTGRES_DB=core_db -d postgres
+# create database "scs";
