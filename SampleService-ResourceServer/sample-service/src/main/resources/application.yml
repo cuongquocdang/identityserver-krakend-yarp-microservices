@@ -10,3 +10,10 @@ jwt-security:
     - /actuator/**
   authenticated-authorities:
     - TEST
+
+rest-template:
+  maximum-total-pool: 10000
+  maximum-per-route-pool: 2000
+  connection-request-timeout: 30000
+  socket-timeout: 30000
+  connect-timeout: 30000

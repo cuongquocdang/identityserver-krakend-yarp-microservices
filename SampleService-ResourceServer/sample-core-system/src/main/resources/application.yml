@@ -18,5 +18,11 @@ spring:
     username: postgres
     password: password
 
+basic-auth-security:
+  username: local-dev
+  password: password
+  publicPaths:
+    - /actuator/**
+
 # docker run --name core_db -p 5432:5432 -e POSTGRES_PASSWORD=password -e POSTGRES_DB=core_db -d postgres
 # create database "scs";

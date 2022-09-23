@@ -1,0 +1,3 @@
+com.example.basicauthsecurityautoconfigure.BasicAuthSecurityProperties
+com.example.basicauthsecurityautoconfigure.BasicAuthSecurityAuthenticationProvider
+com.example.basicauthsecurityautoconfigure.BasicAuthSecurityConfig
