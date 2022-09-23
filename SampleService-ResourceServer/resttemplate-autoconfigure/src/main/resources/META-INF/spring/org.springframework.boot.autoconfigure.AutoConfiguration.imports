@@ -1,0 +1,4 @@
+com.example.resttemplateautoconfigure.RestTemplateProperties
+com.example.resttemplateautoconfigure.RestTemplateConfig
+com.example.resttemplateautoconfigure.CustomRestTemplateConfig
+com.example.resttemplateautoconfigure.CustomRestTemplateFactory
