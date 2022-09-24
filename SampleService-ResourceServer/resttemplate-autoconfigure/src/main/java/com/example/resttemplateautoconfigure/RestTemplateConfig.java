@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
+import org.zalando.logbook.Logbook;
+import org.zalando.logbook.httpclient.LogbookHttpRequestInterceptor;
+import org.zalando.logbook.httpclient.LogbookHttpResponseInterceptor;
 
 @Configuration
 @RequiredArgsConstructor
@@ -18,7 +21,7 @@ public class RestTemplateConfig {
 
     @Bean
     @Primary
-    public RestTemplate restTemplate() {
+    public RestTemplate restTemplate(Logbook logbook) {
         var connectionManager = new PoolingHttpClientConnectionManager();
         connectionManager.setMaxTotal(restTemplateProperties.getMaximumTotalPool());
         connectionManager.setDefaultMaxPerRoute(restTemplateProperties.getMaximumPerRoutePool());
@@ -29,6 +32,8 @@ public class RestTemplateConfig {
                 .setConnectTimeout(restTemplateProperties.getConnectTimeout())
                 .build();
         var httpClient = HttpClientBuilder.create()
+                .addInterceptorFirst(new LogbookHttpRequestInterceptor(logbook))
+                .addInterceptorFirst(new LogbookHttpResponseInterceptor())
                 .setConnectionManager(connectionManager)
                 .setDefaultRequestConfig(requestConfig).build();
         var requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
