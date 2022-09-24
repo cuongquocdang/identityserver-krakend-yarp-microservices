@@ -1,9 +1,6 @@
 package com.example.resttemplateautoconfigure;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,4 +17,19 @@ public class RestTemplateProperties {
     private int connectionRequestTimeout;
     private int socketTimeout;
     private int connectTimeout;
+
+    private ServiceProperties coreService;
+
+    @Data
+    public static class ServiceProperties {
+
+        private Credentials credentials;
+    }
+
+    @Data
+    public static class Credentials {
+
+        private String username;
+        private String password;
+    }
 }
