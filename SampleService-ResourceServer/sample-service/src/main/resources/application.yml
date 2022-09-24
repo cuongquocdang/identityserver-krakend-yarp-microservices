@@ -17,3 +17,13 @@ rest-template:
   connection-request-timeout: 30000
   socket-timeout: 30000
   connect-timeout: 30000
+  core-service:
+    credentials:
+      username: local-dev
+      password: password
+
+sample-core-service:
+  urls:
+    base: http://localhost:8010
+    retrievePostsByPostsId: ${sample-core-service.urls.base}/v1/posts/%s
+    retrieveAllPosts: ${sample-core-service.urls.base}/v1/posts
